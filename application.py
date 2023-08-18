@@ -26,8 +26,8 @@ class filter():
         Zw, Zh = signal.freqs(Zb, Za)
 
         fn = 1.0/(2.0*float(dt))/2.0
-        st.markdown("フィルタ特性")
-        fig, ax = plt.subplots()
+        #st.markdown("フィルタ特性")
+        fig, ax = plt.subplots(figsize=(6, 4))
         ax.plot(Xw*fn, 20*np.log10(abs(Xh)), label="Range_X")
         ax.plot(Yw*fn, 20*np.log10(abs(Yh)), label="Range_Y")
         ax.plot(Zw*fn, 20*np.log10(abs(Zh)), label="Range_Z")
@@ -53,11 +53,12 @@ class filter():
 
         out_string = out1 + out2 + out3
 
-        clipboard.OpenClipboard()
-        clipboard.EmptyClipboard()
-        clipboard.SetClipboardText(out_string)
-        clipboard.CloseClipboard()
-        st.write("フィルタ係数をコピーしました")
+        # clipboard.OpenClipboard()
+        # clipboard.EmptyClipboard()
+        # clipboard.SetClipboardText(out_string)
+        # clipboard.CloseClipboard()
+        st.write('<span style="color:red">右上のコピーボタンでクリップボードにコピー</span>',unsafe_allow_html=True)
+        st.code(out_string)
 
     def get_filtertype(self, rb):
         if rb == "LPF":
@@ -106,6 +107,7 @@ def main():
     st.title("IIR filter coefficient output")
 
     sampling_time = st.sidebar.number_input('Sampling time [ms]', 0.0, 10.0, 4.0)
+    st.sidebar.write('<span style="color:red">単位[ms]に注意</span>',unsafe_allow_html=True)
     rbX = st.sidebar.radio("Range_X", ("LPF", "HPF", "BPF"), horizontal=True)
     if rbX == "LPF":
         minX = 0
@@ -139,7 +141,7 @@ def main():
         minZ = st.sidebar.number_input('Range_Z Min[Hz]', 0.0, 200.0, 1.0)
         maxZ = st.sidebar.number_input('Range_Z Max[Hz]', 0.0, 200.0, 50.0)
 
-    execute_output = st.button("フィルタ特性確認+フィルタ係数コピー")
+    execute_output = st.button("フィルタ特性確認+フィルタ係数出力")
     my_script = filter()
     
     if execute_output:
