@@ -105,8 +105,8 @@ def main():
     #タイトル
     st.title("IIR filter coefficient output")
 
-    sampling_time = st.sidebar.number_input('Sampling time [ms]', 0.0, 10.0, 4.0)
-    st.sidebar.write('<span style="color:red">単位[ms]に注意</span>',unsafe_allow_html=True)
+    sampling_time = st.sidebar.number_input('Sampling time [ms] (単位が"ms"なので注意)', 0.0, 10.0, 4.0)
+    #st.sidebar.write('<span style="color:red">単位[ms]に注意</span>',unsafe_allow_html=True)
     rbX = st.sidebar.radio("Range_X", ("LPF", "HPF", "BPF"), horizontal=True)
     if rbX == "LPF":
         minX = 0
