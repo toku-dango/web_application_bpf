@@ -8,7 +8,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import signal
-import win32clipboard as clipboard
 
 class filter():
     def __init__(self):
